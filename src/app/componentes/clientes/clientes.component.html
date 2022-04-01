@@ -8,7 +8,7 @@
     (click)="resetForm()"
   >
     <i class="fas fa-plus-circle"></i>
-    Agregar Cliente
+    Registrar Nueva Afiliacion
   </button>
 
   <input
@@ -40,7 +40,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
-          Registro de Clientes
+          Registro de afiliado
         </h5>
         <button
           type="button"
@@ -151,7 +151,22 @@
                   </div>
                 </div>
                 <div class="form-group col">
-                  <label for="">Cedula de Identidad *</label>
+                  <label for="">Fecha de nacimiento</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="fNacimiento"
+                    #fNacimiento="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.fNacimiento"
+                    placeholder="Apellidos"
+                    maxlength="50"
+                  />
+                  <!-- <div *ngIf="fNacimiento.value != undefined" class="col">
+                    <p>Max: {{ fNacimiento.value.length }}/50</p>
+                  </div> -->
+                </div>
+                <div class="form-group col">
+                  <label for="">CI *</label>
                   <input
                     type="text"
                     class="form-control"
@@ -184,7 +199,7 @@
               </div>
               <div class="row">
                 <div class="form-group col">
-                  <label for="">Lugar de Expedición *</label>
+                  <label for="">Expedición *</label>
                   <select
                     class="form-control"
                     name="expedicion"
@@ -220,41 +235,8 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="form-group col">
-                  <label for="">Telefono</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="telefono"
-                    #telefono="ngModel"
-                    [(ngModel)]="clienteService.selectedCliente.telefono"
-                    placeholder="Telefono"
-                    maxlength="10"
-                  />
-                  <div *ngIf="telefono.value != undefined" class="col">
-                    <p>Max: {{ telefono.value.length }}/10</p>
-                  </div>
-                </div>
-                <div class="form-group col">
-                  <label for="">Direccion</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="direccion"
-                    #direccion="ngModel"
-                    [(ngModel)]="clienteService.selectedCliente.direccion"
-                    placeholder="Direccion"
-                    maxlength="50"
-                  />
-                  <div *ngIf="direccion.value != undefined" class="col">
-                    <p>Max: {{ direccion.value.length }}/50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
                 <div class="col">
-                  <label>Seleccionar Sexo *</label>
+                  <label> Sexo *</label>
                   <div class="input-group mb-3">
                     <select
                       class="form-control"
@@ -281,18 +263,145 @@
                     </div>
                   </div>
                 </div>
-                <!--
                 <div class="form-group col">
-                  <label for="">Sexo *</label>
+                  <label for="">Estado civil *</label>
+                  <select
+                    class="form-control"
+                    name="eCivil"
+                    #eCivil="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.eCivil"
+                    placeholder="Agredar Expedicion"
+                    required
+                  >
+                    <option [selected]="true" [ngValue]="undefined"
+                    >--Seleccione--</option>
+                    <option>SOLTERO/A</option>
+                    <option>CASADO/A</option>
+                    <option>VIUDO/A</option>
+                  </select>
+                  <div class="row">
+                    <div
+                      class="text-danger col"
+                      *ngIf="
+                      eCivil.errors &&
+                        (eCivil.dirty || eCivil.touched)
+                      "
+                    >
+                      <p [hidden]="!eCivil.errors.required">
+                        Campo requerido.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Tipo Asegurado *</label>
+                  <select
+                    class="form-control"
+                    name="tipoSeguro"
+                    #tipoSeguro="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.tipoSeguro"
+                    placeholder="Agredar Expedicion"
+                    required
+                  >
+                    <option [selected]="true" [ngValue]="undefined"
+                    >--Seleccione--</option>
+                    <option>SEGURADO</option>
+                    <option>BENIFICIARIO</option>
+                    <option>EXTERNO</option>
+                  </select>
+                  <div class="row">
+                    <div
+                      class="text-danger col"
+                      *ngIf="
+                      tipoSeguro.errors &&
+                        (tipoSeguro.dirty || tipoSeguro.touched)
+                      "
+                    >
+                      <p [hidden]="!tipoSeguro.errors.required">
+                        Campo requerido.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group col">
+                  <label for="">Telefono</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="sexo"
-                    #sexo="ngModel"
-                    [(ngModel)]="clienteService.selectedCliente.sexo"
-                    placeholder="Sexo"
+                    name="telefono"
+                    #telefono="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.telefono"
+                    placeholder="Telefono"
+                    maxlength="10"
                   />
-                </div> -->
+                  <div *ngIf="telefono.value != undefined" class="col">
+                    <p>Max: {{ telefono.value.length }}/10</p>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Celular</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="celular"
+                    #celular="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.celular"
+                    placeholder="Telefono"
+                    maxlength="10"
+                  />
+                  <div *ngIf="celular.value != undefined" class="col">
+                    <p>Max: {{ celular.value.length }}/10</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label for="">Recidencia</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="recidencia"
+                    #recidencia="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.recidencia"
+                    placeholder="Recidencia"
+                    maxlength="50"
+                  />
+                  <div *ngIf="recidencia.value != undefined" class="col">
+                    <p>Max: {{ recidencia.value.length }}/50</p>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Municipio</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="municipio"
+                    #municipio="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.municipio"
+                    placeholder="Mumicipio"
+                    maxlength="50"
+                  />
+                  <div *ngIf="municipio.value != undefined" class="col">
+                    <p>Max: {{ municipio.value.length }}/50</p>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Lugar de nacimiento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lNacimiento"
+                    #lNacimiento="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.lNacimiento"
+                    placeholder="Agregar lugar de nacimiento"
+                    maxlength="50"
+                  />
+                  <div *ngIf="lNacimiento.value != undefined" class="col">
+                    <p>Max: {{ lNacimiento.value.length }}/50</p>
+                  </div>
+                </div>
 
                 <div class="form-group col">
                   <label for="">Correo Electronico</label>
@@ -309,6 +418,68 @@
                     <p>Max: {{ email.value.length }}/50</p>
                   </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label for="">Ocupacion</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="ocupacion"
+                    #ocupacion="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.ocupacion"
+                    placeholder="Ocupacion"
+                    maxlength="50"
+                  />
+                  <div *ngIf="ocupacion.value != undefined" class="col">
+                    <p>Max: {{ ocupacion.value.length }}/50</p>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Familiar o Tutor</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="tutor"
+                    #tutor="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.tutor"
+                    placeholder="Tutor"
+                    maxlength="50"
+                  />
+                  <div *ngIf="tutor.value != undefined" class="col">
+                    <p>Max: {{ tutor.value.length }}/50</p>
+                  </div>
+                </div>
+                <div class="form-group col">
+                  <label for="">Departamento</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="depto"
+                    #depto="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.depto"
+                    placeholder="Agregar Departamento"
+                    maxlength="50"
+                  />
+                  <div *ngIf="depto.value != undefined" class="col">
+                    <p>Max: {{ depto.value.length }}/50</p>
+                  </div>
+                </div>
+
+                <div class="form-group col">
+                  <label for="">Fecha de registro</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="fRegistro"
+                    #fRegistro="ngModel"
+                    [(ngModel)]="clienteService.selectedCliente.fRegistro"
+                  />
+                  <!-- <div *ngIf="fRegistro.value != undefined" class="col">
+                    <p>Max: {{ fRegistro.value.length }}/50</p>
+                  </div> -->
+                </div>
+
               </div>
 
               <div class="modal-footer">
